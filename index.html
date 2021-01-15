@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+<body>
+    <div id="app">
+
+        <!-- 選擇食譜 -->
+        <div class="page" v-if="phase === 'home'">
+            
+            <div class="dishes">
+                <h1>What you wanna cook today?</h1>
+                <ul>
+                    <li v-for="item in dishes">
+                        <div v-on:click="gotoRecipe(item)" class="dishesImg" :style="{ backgroundImage: `url(${item.img})` }" > 
+                            <p class="title">{{item.name}}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 食譜 -->
+        <div class="page" v-if="phase === 'recipe'">
+            
+            <div class="recipe">
+                <h1>{{dish.name}}</h1>
+                <div class="recipeImg" :style="{ backgroundImage: `url(${dish.img})` }">
+                </div>
+                <div class="recipeUL">
+                    <h2>食材</h2>
+                    <ul>
+                        <li v-for="item in dish.main">
+                            <span>{{item.name}}</span>
+                            <span>{{item.num}}</span>
+                        </li>
+                    </ul>
+                    <h2>調味料</h2>
+                    <ul>                        
+                        <li v-for="item in dish.seasoning">
+                            <span>{{item.name}}</span>
+                            <span>{{item.num}}</span>
+                        </li>
+                    </ul>
+                    <h2>作法</h2>
+                    <ul class="howto">                       
+                        <li v-for="item in dish.howto">
+                            {{item}}
+                        </li>
+                    </ul>
+                </div>  
+                <div class="goHome" v-on:click='goHome()'>
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="goList" v-on:click='goList()'>
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- 購物清單 -->
+        <div class="page" v-if="phase === 'cart'">
+
+                
+                <div class="buildList" v-if='cart.length == 0'>
+                    <div class=".title">
+                       <h1>{{dish.name}}的購物清單</h1> 
+                    </div>
+                        <div class="forRecipe">
+                            <h3>主要材料</h3>
+                            <div v-for="item in dish.main">
+                                <input type="checkbox" :id='item.name' v-model='item.checked'>
+                                <label :for='item.name'>{{ item.name }}{{item.num}}</label>
+                            </div> 
+                            <h3>調味料</h3>
+                            <div v-for="item in dish.seasoning">
+                                <input type="checkbox" :id='item.name' v-model='item.checked'>
+                                <label :for='item.name'>{{ item.name }}</label>
+                            </div>                            
+                        </div>
+                            <div class="goBack" v-on:click='goBack()'>
+                                <i class="fas fa-arrow-left"></i>
+                            </div>
+                        <div class="forOther">
+                            <h3>還有其他要買的嗎？</h3>
+                            <input type="text" v-model="tempCart"  v-on:keyup.enter.trim='otherCartPlus()'>
+                            <span>
+                                <i class="far fa-plus-square" v-on:click.prevent.trim='otherCartPlus()'></i>
+                            </span>
+                            <ul v-for='(item,index) in cartForOther'>
+                                <li>{{item.name}}
+                                    <span><i class="far fa-times-circle" v-on:click='cartDel(index)'></i></span>
+                                </li>
+                            </ul>
+                            <div class="goCart" v-on:click='goCart()'>
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                        </div>     
+                                                  
+                </div>
+                <div class="shoppingList" v-if='!cart.length == 0'>
+                        <div class=".title">
+                            <h1>{{dish.name}}的購物清單</h1> 
+                        </div>
+                        <div class="cart">
+                            <h2 v-if='!cart.length == 0'>食譜材料</h2>
+                            <ul v-for="item in cart" v-if='!cart.length == 0'>
+                                <li @click='item.checked =!item.checked'
+                                    :class='{"bought":item.checked}'>
+                                    {{item.name}}
+                                </li>
+                            </ul>
+                            <h2 v-if='!cartForOther.length == 0'>其他購物品項</h2>
+                            <ul v-for="item in cartForOther" v-if='!cartForOther.length == 0'>                               
+                                <li @click='item.checked =!item.checked'
+                                    :class='{"bought":item.checked}'>
+                                    {{item.name}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="goBack" v-on:click='backtoRecipe()'>
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                    
+                </div>
+                
+
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="all.js"></script>
+</body>
+
+</html>
