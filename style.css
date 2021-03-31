@@ -7,6 +7,7 @@
 
 
 body { 
+    font-family: Microsoft JhengHeiArial, Helvetica, sans-serif;
     min-height: 800px;
     display: grid;
     place-items: center;
@@ -291,4 +292,5 @@ h1{
 /* 買好的商品增加刪除線 */
 .bought{
     text-decoration-line: line-through;
+    color: #afafaf;
 }

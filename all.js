@@ -4,20 +4,20 @@ var app = new Vue({
       dishes:{
         eggplant:{
             name:'魚香茄子',
-            img:'https://images.unsplash.com/photo-1547647612-be4eb49541e4',
+            img:'img/eggplant.jpg',
             main:[{name:'絞肉',num:'100g', checked:false},{name:'茄子',num:'兩條', checked:false}],
             seasoning:[{name:'豆瓣醬',num:'100g', checked:false},{name:'醬油',num:'兩湯匙', checked:false}],
             howto:['1.茄子切段後過油','2.絞肉炒香混入調味料','3.混合肉醬和茄子'],
             //火狐無法顯示 <ul class="howto"><li v-for="item in dish.howto">{{item}}</li></ul>
         },
         chicken:{name:'三杯雞',
-            img:'https://images.unsplash.com/photo-1525755662778-989d0524087e',
+            img:'img/GBGD.jpg',
             main:[{name:'雞肉',num:'半隻', checked:false},{name:'蒜頭、薑片',num:'適量', checked:false},{name:'九層塔',num:'適量', checked:false}],
             seasoning:[{name:'麻油',num:'兩湯匙', checked:false},{name:'醬油',num:'兩湯匙', checked:false},{name:'米酒',num:'兩湯匙', checked:false}],
             howto:['1.雞肉表面煎至金黃','2.爆香辛香料','3.加入調味料收乾','4.起鍋前加入九層塔'],
         },
         beef:{name:'牛肉麵',
-            img:'https://images.unsplash.com/photo-1577859714523-5f0b6c98ece7',
+            img:'img/beef_noodle.jpg',
             main:[{name:'牛腱肉',num:'1kg', checked:false},{name:'蘿蔔',num:'一條', checked:false}],
             seasoning:[{name:'豆瓣醬',num:'100g', checked:false},{name:'市售滷包',num:'一份', checked:false},{name:'醬油',num:'120ml', checked:false},],
             howto:['1.牛腱肉過水後切至小塊','2.炒香牛肉及醬料','3.加入滷包和水燉煮2小時','4.燉煮完畢後再加入切塊蘿蔔煮30分'],
